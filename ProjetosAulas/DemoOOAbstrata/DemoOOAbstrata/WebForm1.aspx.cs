@@ -32,7 +32,6 @@ namespace DemoOOAbstrata
             }
 
             area = figura.CalculaArea();
-
             LbArea.Text = area.ToString();
                            
         }
