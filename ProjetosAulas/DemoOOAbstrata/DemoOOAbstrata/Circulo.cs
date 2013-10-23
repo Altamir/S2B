@@ -13,5 +13,10 @@ namespace DemoOOAbstrata
         {
             return Math.PI * Raio * Raio;
         }
+
+        public override string Desenhar()
+        {
+            return "Um Circulo!";
+        }
     }
 }

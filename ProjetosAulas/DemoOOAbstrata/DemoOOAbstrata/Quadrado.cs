@@ -13,5 +13,10 @@ namespace DemoOOAbstrata
         {
             return Lado * Lado;
         }
+
+        public override string Desenhar()
+        {
+            return "Um quadrado!";
+        }
     }
 }

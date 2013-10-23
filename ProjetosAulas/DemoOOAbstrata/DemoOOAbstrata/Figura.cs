@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace DemoOOAbstrata
+namespace DemoOOAbstrata 
 {
-    public abstract class Figura
+    public abstract class Figura : Desenhavel
     {
         private int x;
         private int y;
@@ -23,5 +23,8 @@ namespace DemoOOAbstrata
         }
 
         public abstract double CalculaArea();
+
+        public abstract string Desenhar();
+       
     }
 }
