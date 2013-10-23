@@ -22,5 +22,10 @@ namespace DemoWeb4
         {
             LbEstado.Text = DropDLEstados.SelectedValue;
         }
+
+        protected void DropDLEstados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LbEstado.Text = DropDLEstados.SelectedValue;
+        }
     }
 }

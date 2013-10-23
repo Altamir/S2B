@@ -9,7 +9,8 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <asp:DropDownList ID="DropDLEstados" runat="server">            
+        <asp:DropDownList ID="DropDLEstados" runat="server" AutoPostBack="True" 
+            onselectedindexchanged="DropDLEstados_SelectedIndexChanged">            
         </asp:DropDownList>
         <br />
         <br />
