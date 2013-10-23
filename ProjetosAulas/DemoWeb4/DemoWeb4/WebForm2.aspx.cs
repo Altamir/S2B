@@ -11,11 +11,13 @@ namespace DemoWeb4
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(true){
             EstadosDoBrasil estados = new EstadosDoBrasil();
             DropDLEstados.DataSource = estados.Estados;
             DropDLEstados.DataTextField = "Nome";
             DropDLEstados.DataValueField = "Sigla";
             DropDLEstados.DataBind();
+            }
         }
 
         protected void BtEnviar_Click(object sender, EventArgs e)
