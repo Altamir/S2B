@@ -13,18 +13,24 @@ namespace LAB_6_Interfaces_do_Framework
         {
             UsandoStruct();
 
+            UsandoDicionario();
+        }
+
+        private void UsandoDicionario()
+        {
             IDictionary<string, Pessoa> dic;
 
-            dic = new Dictionary<string,Pessoa>() ;
+            dic = new Dictionary<string, Pessoa>();
 
-            dic.Add("111111111-11", new Pessoa("Carlos",21));
-            dic.Add("222222222-11", new Pessoa("Marcos",41));
-            dic.Add("333333333-11", new Pessoa("MArias",23));
-            dic.Add("444444444-11", new Pessoa("Ana",01));
+            dic.Add("111111111-11", new Pessoa("Carlos", 21));
+            dic.Add("222222222-11", new Pessoa("Marcos", 41));
+            dic.Add("333333333-11", new Pessoa("MArias", 23));
+            dic.Add("444444444-11", new Pessoa("Ana", 01));
 
             Pessoa ps = dic["111111111-11"];
 
-            foreach(var coisa in dic){            
+            foreach (var coisa in dic)
+            {
                 Response.Write(coisa.Key);
                 Response.Write(coisa.Value.Nome);
             }
@@ -33,12 +39,10 @@ namespace LAB_6_Interfaces_do_Framework
                          orderby p.Nome
                          select p.Nome;
 
-            foreach(var p in ordena){
+            foreach (var p in ordena)
+            {
                 Response.Write(p);
             }
-
-
-
 
 
         }
