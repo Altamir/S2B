@@ -11,12 +11,9 @@ namespace DemoWeb4
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(true){
-            EstadosDoBrasil estados = new EstadosDoBrasil();
-            DropDLEstados.DataSource = estados.Estados;
-            DropDLEstados.DataTextField = "Nome";
-            DropDLEstados.DataValueField = "Sigla";
-            DropDLEstados.DataBind();
+            if (!IsPostBack)
+            {
+                PreencheDropBoxEstados();
             }
         }
 
@@ -28,6 +25,15 @@ namespace DemoWeb4
         protected void DropDLEstados_SelectedIndexChanged(object sender, EventArgs e)
         {
             LbEstado.Text = DropDLEstados.SelectedValue;
+        }
+
+        private void PreencheDropBoxEstados()
+        {
+            EstadosDoBrasil estados = new EstadosDoBrasil();
+            DropDLEstados.DataSource = estados.Estados;
+            DropDLEstados.DataTextField = "Nome";
+            DropDLEstados.DataValueField = "Sigla";
+            DropDLEstados.DataBind();
         }
     }
 }

@@ -11,12 +11,12 @@ namespace DemoWeb4
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void BtOla_Click(object sender, EventArgs e)
         {
-            LbOla.Text = "Ola, "+TextBox1.Text;
+            LbOla.Text = "Ola, " + TextBox1.Text;
         }
     }
 }
