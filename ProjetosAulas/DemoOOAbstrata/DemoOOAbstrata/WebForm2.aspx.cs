@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Text;
 
 namespace DemoOOAbstrata
 {
@@ -19,12 +20,13 @@ namespace DemoOOAbstrata
 
             Array.Sort(figuras);
 
-            Label1.Text = "";
-
+            StringBuilder texto = new StringBuilder();
             foreach (var quadrado in figuras)
             {
-                Label1.Text += quadrado.Lado + " , ";
+                texto.Append(quadrado.Lado + " , ");
             }
+
+            Label1.Text = texto.ToString();
 
         }
     }
