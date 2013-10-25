@@ -77,8 +77,8 @@ namespace TestPessoaStruct
         [UrlToTest("http://localhost:50891/")]
         public void PessoaStructConstructorTest()
         {
-            string n = string.Empty; // TODO: Initialize to an appropriate value
-            int i = 0; // TODO: Initialize to an appropriate value
+            string n = "Altamir"; 
+            int i = 12; 
             PessoaStruct target = new PessoaStruct(n, i);
             Assert.Inconclusive("TODO: Implement code to verify target");
         }
@@ -95,13 +95,13 @@ namespace TestPessoaStruct
         [UrlToTest("http://localhost:50891/")]
         public void IdadeTest()
         {
-            PessoaStruct target = new PessoaStruct(); // TODO: Initialize to an appropriate value
-            int expected = 0; // TODO: Initialize to an appropriate value
-            int actual;
-            target.Idade = expected;
-            actual = target.Idade;
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
+            string n = "Altamir";
+            int i = 12;
+            PessoaStruct target = new PessoaStruct(n, i);
+            int expected = 12;
+            int 
+            Assert.AreEqual(expected, target.Idade);
+            //Assert.Inconclusive("Verify the correctness of this test method.");
         }
 
         /// <summary>
