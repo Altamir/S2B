@@ -10,6 +10,7 @@
     <form id="form1" runat="server">
     <div>
         <asp:Button ID="Button1" runat="server" Text="Button" onclick="Button1_Click" />
+        <asp:Button ID="Button2" runat="server" onclick="Button2_Click" Text="Button" />
     </div>
     </form>
 </body>
