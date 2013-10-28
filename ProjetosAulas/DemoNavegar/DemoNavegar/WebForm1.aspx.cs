@@ -13,5 +13,10 @@ namespace DemoNavegar
         {
 
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Server.Transfer("WebForm2.aspx", true);
+        }
     }
 }
