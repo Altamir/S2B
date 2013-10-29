@@ -54,6 +54,7 @@
     <Content Include="App_Data\DemoDB1_log.ldf">
       <DependentUpon>DemoDB1.mdf</DependentUpon>
     </Content>
+    <Content Include="inserirPessoas.aspx" />
     <Content Include="ListarPessoas.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -65,6 +66,13 @@
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="inserirPessoas.aspx.cs">
+      <DependentUpon>inserirPessoas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="inserirPessoas.aspx.designer.cs">
+      <DependentUpon>inserirPessoas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ListarPessoas.aspx.cs">
       <DependentUpon>ListarPessoas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

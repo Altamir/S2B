@@ -7,8 +7,9 @@
     <title></title>
 </head>
 <body>
+Pessoas
     <form id="form1" runat="server">
-    Pessoas<asp:SqlDataSource ID="SqlDataSource1" 
+    <asp:SqlDataSource ID="SqlDataSource1" 
         runat="server" 
         ConnectionString="<%$ ConnectionStrings:ConnectionStringPessoas %>" SelectCommand="SELECT * FROM pessoas
 WHERE nome LIKE @NOME + '%'">
