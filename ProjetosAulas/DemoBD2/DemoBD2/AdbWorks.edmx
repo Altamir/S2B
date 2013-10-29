@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AdbWorksDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="AdbWorksDataModelStoreContainer">
+          <EntitySet Name="CountryRegionCurrency" EntityType="AdbWorksDataModel.Store.CountryRegionCurrency" store:Type="Tables" Schema="Sales" />
+          <EntitySet Name="Currency" EntityType="AdbWorksDataModel.Store.Currency" store:Type="Tables" Schema="Sales" />
+          <EntitySet Name="CurrencyRate" EntityType="AdbWorksDataModel.Store.CurrencyRate" store:Type="Tables" Schema="Sales" />
+          <AssociationSet Name="FK_CountryRegionCurrency_Currency_CurrencyCode" Association="AdbWorksDataModel.Store.FK_CountryRegionCurrency_Currency_CurrencyCode">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="CountryRegionCurrency" EntitySet="CountryRegionCurrency" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CurrencyRate_Currency_FromCurrencyCode" Association="AdbWorksDataModel.Store.FK_CurrencyRate_Currency_FromCurrencyCode">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="CurrencyRate" EntitySet="CurrencyRate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CurrencyRate_Currency_ToCurrencyCode" Association="AdbWorksDataModel.Store.FK_CurrencyRate_Currency_ToCurrencyCode">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="CurrencyRate" EntitySet="CurrencyRate" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CountryRegionCurrency">
+          <Key>
+            <PropertyRef Name="CountryRegionCode" />
+            <PropertyRef Name="CurrencyCode" />
+          </Key>
+          <Property Name="CountryRegionCode" Type="nvarchar" Nullable="false" MaxLength="3" />
+          <Property Name="CurrencyCode" Type="nchar" Nullable="false" MaxLength="3" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="CurrencyCode" />
+          </Key>
+          <Property Name="CurrencyCode" Type="nchar" Nullable="false" MaxLength="3" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CurrencyRate">
+          <Key>
+            <PropertyRef Name="CurrencyRateID" />
+          </Key>
+          <Property Name="CurrencyRateID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CurrencyRateDate" Type="datetime" Nullable="false" />
+          <Property Name="FromCurrencyCode" Type="nchar" Nullable="false" MaxLength="3" />
+          <Property Name="ToCurrencyCode" Type="nchar" Nullable="false" MaxLength="3" />
+          <Property Name="AverageRate" Type="money" Nullable="false" />
+          <Property Name="EndOfDayRate" Type="money" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CountryRegionCurrency_Currency_CurrencyCode">
+          <End Role="Currency" Type="AdbWorksDataModel.Store.Currency" Multiplicity="1" />
+          <End Role="CountryRegionCurrency" Type="AdbWorksDataModel.Store.CountryRegionCurrency" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="CurrencyCode" />
+            </Principal>
+            <Dependent Role="CountryRegionCurrency">
+              <PropertyRef Name="CurrencyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CurrencyRate_Currency_FromCurrencyCode">
+          <End Role="Currency" Type="AdbWorksDataModel.Store.Currency" Multiplicity="1" />
+          <End Role="CurrencyRate" Type="AdbWorksDataModel.Store.CurrencyRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="CurrencyCode" />
+            </Principal>
+            <Dependent Role="CurrencyRate">
+              <PropertyRef Name="FromCurrencyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CurrencyRate_Currency_ToCurrencyCode">
+          <End Role="Currency" Type="AdbWorksDataModel.Store.Currency" Multiplicity="1" />
+          <End Role="CurrencyRate" Type="AdbWorksDataModel.Store.CurrencyRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="CurrencyCode" />
+            </Principal>
+            <Dependent Role="CurrencyRate">
+              <PropertyRef Name="ToCurrencyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AdbWorksDataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="AdventureWorks2008_DataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CountryRegionCurrencies" EntityType="AdbWorksDataModel.CountryRegionCurrency" />
+          <EntitySet Name="Currencies" EntityType="AdbWorksDataModel.Currency" />
+          <EntitySet Name="CurrencyRates" EntityType="AdbWorksDataModel.CurrencyRate" />
+          <AssociationSet Name="FK_CountryRegionCurrency_Currency_CurrencyCode" Association="AdbWorksDataModel.FK_CountryRegionCurrency_Currency_CurrencyCode">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="CountryRegionCurrency" EntitySet="CountryRegionCurrencies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CurrencyRate_Currency_FromCurrencyCode" Association="AdbWorksDataModel.FK_CurrencyRate_Currency_FromCurrencyCode">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="CurrencyRate" EntitySet="CurrencyRates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CurrencyRate_Currency_ToCurrencyCode" Association="AdbWorksDataModel.FK_CurrencyRate_Currency_ToCurrencyCode">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="CurrencyRate" EntitySet="CurrencyRates" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CountryRegionCurrency">
+          <Key>
+            <PropertyRef Name="CountryRegionCode" />
+            <PropertyRef Name="CurrencyCode" />
+          </Key>
+          <Property Name="CountryRegionCode" Type="String" Nullable="false" MaxLength="3" Unicode="true" FixedLength="false" />
+          <Property Name="CurrencyCode" Type="String" Nullable="false" MaxLength="3" Unicode="true" FixedLength="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Currency" Relationship="AdbWorksDataModel.FK_CountryRegionCurrency_Currency_CurrencyCode" FromRole="CountryRegionCurrency" ToRole="Currency" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="CurrencyCode" />
+          </Key>
+          <Property Name="CurrencyCode" Type="String" Nullable="false" MaxLength="3" Unicode="true" FixedLength="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="CountryRegionCurrencies" Relationship="AdbWorksDataModel.FK_CountryRegionCurrency_Currency_CurrencyCode" FromRole="Currency" ToRole="CountryRegionCurrency" />
+          <NavigationProperty Name="FromCurrencyRates" Relationship="AdbWorksDataModel.FK_CurrencyRate_Currency_FromCurrencyCode" FromRole="Currency" ToRole="CurrencyRate" />
+          <NavigationProperty Name="ToCurrencyRates" Relationship="AdbWorksDataModel.FK_CurrencyRate_Currency_ToCurrencyCode" FromRole="Currency" ToRole="CurrencyRate" />
+        </EntityType>
+        <EntityType Name="CurrencyRate">
+          <Key>
+            <PropertyRef Name="CurrencyRateID" />
+          </Key>
+          <Property Name="CurrencyRateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CurrencyRateDate" Type="DateTime" Nullable="false" />
+          <Property Name="FromCurrencyCode" Type="String" Nullable="false" MaxLength="3" Unicode="true" FixedLength="true" />
+          <Property Name="ToCurrencyCode" Type="String" Nullable="false" MaxLength="3" Unicode="true" FixedLength="true" />
+          <Property Name="AverageRate" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="EndOfDayRate" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="FromCurrency" Relationship="AdbWorksDataModel.FK_CurrencyRate_Currency_FromCurrencyCode" FromRole="CurrencyRate" ToRole="Currency" />
+          <NavigationProperty Name="ToCurrency" Relationship="AdbWorksDataModel.FK_CurrencyRate_Currency_ToCurrencyCode" FromRole="CurrencyRate" ToRole="Currency" />
+        </EntityType>
+        <Association Name="FK_CountryRegionCurrency_Currency_CurrencyCode">
+          <End Role="Currency" Type="AdbWorksDataModel.Currency" Multiplicity="1" />
+          <End Role="CountryRegionCurrency" Type="AdbWorksDataModel.CountryRegionCurrency" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="CurrencyCode" />
+            </Principal>
+            <Dependent Role="CountryRegionCurrency">
+              <PropertyRef Name="CurrencyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CurrencyRate_Currency_FromCurrencyCode">
+          <End Role="Currency" Type="AdbWorksDataModel.Currency" Multiplicity="1" />
+          <End Role="CurrencyRate" Type="AdbWorksDataModel.CurrencyRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="CurrencyCode" />
+            </Principal>
+            <Dependent Role="CurrencyRate">
+              <PropertyRef Name="FromCurrencyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CurrencyRate_Currency_ToCurrencyCode">
+          <End Role="Currency" Type="AdbWorksDataModel.Currency" Multiplicity="1" />
+          <End Role="CurrencyRate" Type="AdbWorksDataModel.CurrencyRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="CurrencyCode" />
+            </Principal>
+            <Dependent Role="CurrencyRate">
+              <PropertyRef Name="ToCurrencyCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AdbWorksDataModelStoreContainer" CdmEntityContainer="AdventureWorks2008_DataEntities">
+          <EntitySetMapping Name="CountryRegionCurrencies">
+            <EntityTypeMapping TypeName="AdbWorksDataModel.CountryRegionCurrency">
+              <MappingFragment StoreEntitySet="CountryRegionCurrency">
+                <ScalarProperty Name="CountryRegionCode" ColumnName="CountryRegionCode" />
+                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currencies">
+            <EntityTypeMapping TypeName="AdbWorksDataModel.Currency">
+              <MappingFragment StoreEntitySet="Currency">
+                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CurrencyRates">
+            <EntityTypeMapping TypeName="AdbWorksDataModel.CurrencyRate">
+              <MappingFragment StoreEntitySet="CurrencyRate">
+                <ScalarProperty Name="CurrencyRateID" ColumnName="CurrencyRateID" />
+                <ScalarProperty Name="CurrencyRateDate" ColumnName="CurrencyRateDate" />
+                <ScalarProperty Name="FromCurrencyCode" ColumnName="FromCurrencyCode" />
+                <ScalarProperty Name="ToCurrencyCode" ColumnName="ToCurrencyCode" />
+                <ScalarProperty Name="AverageRate" ColumnName="AverageRate" />
+                <ScalarProperty Name="EndOfDayRate" ColumnName="EndOfDayRate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="AdbWorks">
+        <EntityTypeShape EntityType="AdbWorksDataModel.CountryRegionCurrency" Width="2.375" PointX="3.125" PointY="1.125" Height="1.787985026041667" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdbWorksDataModel.Currency" Width="2.375" PointX="0.5" PointY="2.625" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdbWorksDataModel.CurrencyRate" Width="2.375" PointX="3.125" PointY="3.25" Height="2.7494921874999996" IsExpanded="true" />
+        <AssociationConnector Association="AdbWorksDataModel.FK_CountryRegionCurrency_Currency_CurrencyCode" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.6875" PointY="2.625" />
+          <ConnectorPoint PointX="1.6875" PointY="1.8749995" />
+          <ConnectorPoint PointX="3.125" PointY="1.8749995" />
+        </AssociationConnector>
+        <AssociationConnector Association="AdbWorksDataModel.FK_CurrencyRate_Currency_FromCurrencyCode" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.875" PointY="4.3187107086181635" />
+          <ConnectorPoint PointX="3.125" PointY="4.3187107086181635" />
+        </AssociationConnector>
+        <AssociationConnector Association="AdbWorksDataModel.FK_CurrencyRate_Currency_ToCurrencyCode" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.875" PointY="3.7218553543090818" />
+          <ConnectorPoint PointX="3.125" PointY="3.7218553543090818" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
