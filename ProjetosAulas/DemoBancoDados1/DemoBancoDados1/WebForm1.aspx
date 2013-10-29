@@ -9,7 +9,14 @@
 <body>
     <form id="form1" runat="server">
     Pessoas<asp:SqlDataSource ID="SqlDataSource1" 
-        runat="server"></asp:SqlDataSource>
+        runat="server" 
+        ConnectionString="<%$ ConnectionStrings:ConnectionStringPessoas %>" SelectCommand="SELECT * FROM pessoas
+WHERE nome LIKE @NOME + '%'">
+        <SelectParameters>
+            <asp:ControlParameter ControlID="DropDownList1" Name="NOME" 
+                PropertyName="SelectedValue" />
+        </SelectParameters>
+    </asp:SqlDataSource>
 &nbsp;<div>
         <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True">
             <asp:ListItem>A</asp:ListItem>
@@ -30,10 +37,15 @@
         <asp:GridView ID="GridView1" runat="server" AllowSorting="True" 
             BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" 
             CellPadding="4" DataSourceID="SqlDataSource1" ForeColor="Black" 
-            GridLines="Vertical">
+            GridLines="Vertical" AutoGenerateColumns="False" DataKeyNames="id" 
+            style="margin-right: 184px" Width="273px">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:CommandField ShowSelectButton="True" />
+                <asp:BoundField DataField="id" HeaderText="id" InsertVisible="False" 
+                    ReadOnly="True" SortExpression="id" />
+                <asp:BoundField DataField="nome" HeaderText="nome" SortExpression="nome" />
+                <asp:BoundField DataField="telefone" HeaderText="telefone" 
+                    SortExpression="telefone" />
             </Columns>
             <FooterStyle BackColor="#CCCC99" />
             <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
