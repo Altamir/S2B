@@ -6,14 +6,9 @@
     <edmx:StorageModels>
       <Schema Namespace="AdventureWorks2008_DataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="AdventureWorks2008_DataModelStoreContainer">
-          <EntitySet Name="CountryRegion" EntityType="AdventureWorks2008_DataModel.Store.CountryRegion" store:Type="Tables" Schema="Person" />
           <EntitySet Name="CountryRegionCurrency" EntityType="AdventureWorks2008_DataModel.Store.CountryRegionCurrency" store:Type="Tables" Schema="Sales" />
           <EntitySet Name="Currency" EntityType="AdventureWorks2008_DataModel.Store.Currency" store:Type="Tables" Schema="Sales" />
           <EntitySet Name="CurrencyRate" EntityType="AdventureWorks2008_DataModel.Store.CurrencyRate" store:Type="Tables" Schema="Sales" />
-          <AssociationSet Name="FK_CountryRegionCurrency_CountryRegion_CountryRegionCode" Association="AdventureWorks2008_DataModel.Store.FK_CountryRegionCurrency_CountryRegion_CountryRegionCode">
-            <End Role="CountryRegion" EntitySet="CountryRegion" />
-            <End Role="CountryRegionCurrency" EntitySet="CountryRegionCurrency" />
-          </AssociationSet>
           <AssociationSet Name="FK_CountryRegionCurrency_Currency_CurrencyCode" Association="AdventureWorks2008_DataModel.Store.FK_CountryRegionCurrency_Currency_CurrencyCode">
             <End Role="Currency" EntitySet="Currency" />
             <End Role="CountryRegionCurrency" EntitySet="CountryRegionCurrency" />
@@ -27,14 +22,6 @@
             <End Role="CurrencyRate" EntitySet="CurrencyRate" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="CountryRegion">
-          <Key>
-            <PropertyRef Name="CountryRegionCode" />
-          </Key>
-          <Property Name="CountryRegionCode" Type="nvarchar" Nullable="false" MaxLength="3" />
-          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
-        </EntityType>
         <EntityType Name="CountryRegionCurrency">
           <Key>
             <PropertyRef Name="CountryRegionCode" />
@@ -64,18 +51,6 @@
           <Property Name="EndOfDayRate" Type="money" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
         </EntityType>
-        <Association Name="FK_CountryRegionCurrency_CountryRegion_CountryRegionCode">
-          <End Role="CountryRegion" Type="AdventureWorks2008_DataModel.Store.CountryRegion" Multiplicity="1" />
-          <End Role="CountryRegionCurrency" Type="AdventureWorks2008_DataModel.Store.CountryRegionCurrency" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CountryRegion">
-              <PropertyRef Name="CountryRegionCode" />
-            </Principal>
-            <Dependent Role="CountryRegionCurrency">
-              <PropertyRef Name="CountryRegionCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CountryRegionCurrency_Currency_CurrencyCode">
           <End Role="Currency" Type="AdventureWorks2008_DataModel.Store.Currency" Multiplicity="1" />
           <End Role="CountryRegionCurrency" Type="AdventureWorks2008_DataModel.Store.CountryRegionCurrency" Multiplicity="*" />
@@ -117,18 +92,13 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AdventureWorks2008_DataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="AdventureWorks2008_DataEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CountryRegions" EntityType="AdventureWorks2008_DataModel.CountryRegion" />
+        <EntityContainer Name="AdventureWorks2008_DataEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CountryRegionCurrencies" EntityType="AdventureWorks2008_DataModel.CountryRegionCurrency" />
           <EntitySet Name="Currencies" EntityType="AdventureWorks2008_DataModel.Currency" />
           <EntitySet Name="CurrencyRates" EntityType="AdventureWorks2008_DataModel.CurrencyRate" />
-          <AssociationSet Name="FK_CountryRegionCurrency_CountryRegion_CountryRegionCode" Association="AdventureWorks2008_DataModel.FK_CountryRegionCurrency_CountryRegion_CountryRegionCode">
-            <End Role="CountryRegion" EntitySet="CountryRegions" />
-            <End Role="CountryRegionCurrency" EntitySet="CountryRegionCurrencies" />
-          </AssociationSet>
           <AssociationSet Name="FK_CountryRegionCurrency_Currency_CurrencyCode" Association="AdventureWorks2008_DataModel.FK_CountryRegionCurrency_Currency_CurrencyCode">
-            <End Role="Currency" EntitySet="Currencies" />
-            <End Role="CountryRegionCurrency" EntitySet="CountryRegionCurrencies" />
+            <End EntitySet="Currencies" Role="Currency" />
+            <End EntitySet="CountryRegionCurrencies" Role="CountryRegionCurrency" />
           </AssociationSet>
           <AssociationSet Name="FK_CurrencyRate_Currency_FromCurrencyCode" Association="AdventureWorks2008_DataModel.FK_CurrencyRate_Currency_FromCurrencyCode">
             <End Role="Currency" EntitySet="Currencies" />
@@ -139,15 +109,6 @@
             <End Role="CurrencyRate" EntitySet="CurrencyRates" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="CountryRegion">
-          <Key>
-            <PropertyRef Name="CountryRegionCode" />
-          </Key>
-          <Property Name="CountryRegionCode" Type="String" Nullable="false" MaxLength="3" Unicode="true" FixedLength="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="CountryRegionCurrencies" Relationship="AdventureWorks2008_DataModel.FK_CountryRegionCurrency_CountryRegion_CountryRegionCode" FromRole="CountryRegion" ToRole="CountryRegionCurrency" />
-        </EntityType>
         <EntityType Name="CountryRegionCurrency">
           <Key>
             <PropertyRef Name="CountryRegionCode" />
@@ -156,7 +117,6 @@
           <Property Name="CountryRegionCode" Type="String" Nullable="false" MaxLength="3" Unicode="true" FixedLength="false" />
           <Property Name="CurrencyCode" Type="String" Nullable="false" MaxLength="3" Unicode="true" FixedLength="true" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="CountryRegion" Relationship="AdventureWorks2008_DataModel.FK_CountryRegionCurrency_CountryRegion_CountryRegionCode" FromRole="CountryRegionCurrency" ToRole="CountryRegion" />
           <NavigationProperty Name="Currency" Relationship="AdventureWorks2008_DataModel.FK_CountryRegionCurrency_Currency_CurrencyCode" FromRole="CountryRegionCurrency" ToRole="Currency" />
         </EntityType>
         <EntityType Name="Currency">
@@ -167,8 +127,8 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="CountryRegionCurrencies" Relationship="AdventureWorks2008_DataModel.FK_CountryRegionCurrency_Currency_CurrencyCode" FromRole="Currency" ToRole="CountryRegionCurrency" />
-          <NavigationProperty Name="FromCurrencyRates" Relationship="AdventureWorks2008_DataModel.FK_CurrencyRate_Currency_FromCurrencyCode" FromRole="Currency" ToRole="CurrencyRate" />
-          <NavigationProperty Name="ToCurrencyRates1" Relationship="AdventureWorks2008_DataModel.FK_CurrencyRate_Currency_ToCurrencyCode" FromRole="Currency" ToRole="CurrencyRate" />
+          <NavigationProperty Name="CurrencyRates" Relationship="AdventureWorks2008_DataModel.FK_CurrencyRate_Currency_FromCurrencyCode" FromRole="Currency" ToRole="CurrencyRate" />
+          <NavigationProperty Name="CurrencyRates1" Relationship="AdventureWorks2008_DataModel.FK_CurrencyRate_Currency_ToCurrencyCode" FromRole="Currency" ToRole="CurrencyRate" />
         </EntityType>
         <EntityType Name="CurrencyRate">
           <Key>
@@ -181,24 +141,12 @@
           <Property Name="AverageRate" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="EndOfDayRate" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="FromCurrency" Relationship="AdventureWorks2008_DataModel.FK_CurrencyRate_Currency_FromCurrencyCode" FromRole="CurrencyRate" ToRole="Currency" />
-          <NavigationProperty Name="ToCurrency1" Relationship="AdventureWorks2008_DataModel.FK_CurrencyRate_Currency_ToCurrencyCode" FromRole="CurrencyRate" ToRole="Currency" />
+          <NavigationProperty Name="Currency" Relationship="AdventureWorks2008_DataModel.FK_CurrencyRate_Currency_FromCurrencyCode" FromRole="CurrencyRate" ToRole="Currency" />
+          <NavigationProperty Name="Currency1" Relationship="AdventureWorks2008_DataModel.FK_CurrencyRate_Currency_ToCurrencyCode" FromRole="CurrencyRate" ToRole="Currency" />
         </EntityType>
-        <Association Name="FK_CountryRegionCurrency_CountryRegion_CountryRegionCode">
-          <End Role="CountryRegion" Type="AdventureWorks2008_DataModel.CountryRegion" Multiplicity="1" />
-          <End Role="CountryRegionCurrency" Type="AdventureWorks2008_DataModel.CountryRegionCurrency" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CountryRegion">
-              <PropertyRef Name="CountryRegionCode" />
-            </Principal>
-            <Dependent Role="CountryRegionCurrency">
-              <PropertyRef Name="CountryRegionCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CountryRegionCurrency_Currency_CurrencyCode">
-          <End Role="Currency" Type="AdventureWorks2008_DataModel.Currency" Multiplicity="1" />
-          <End Role="CountryRegionCurrency" Type="AdventureWorks2008_DataModel.CountryRegionCurrency" Multiplicity="*" />
+          <End Type="AdventureWorks2008_DataModel.Currency" Multiplicity="1" Role="Currency" />
+          <End Type="AdventureWorks2008_DataModel.CountryRegionCurrency" Multiplicity="*" Role="CountryRegionCurrency" />
           <ReferentialConstraint>
             <Principal Role="Currency">
               <PropertyRef Name="CurrencyCode" />
@@ -237,16 +185,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AdventureWorks2008_DataModelStoreContainer" CdmEntityContainer="AdventureWorks2008_DataEntities1">
-          <EntitySetMapping Name="CountryRegions">
-            <EntityTypeMapping TypeName="AdventureWorks2008_DataModel.CountryRegion">
-              <MappingFragment StoreEntitySet="CountryRegion">
-                <ScalarProperty Name="CountryRegionCode" ColumnName="CountryRegionCode" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="AdventureWorks2008_DataModelStoreContainer" CdmEntityContainer="AdventureWorks2008_DataEntities">
           <EntitySetMapping Name="CountryRegionCurrencies">
             <EntityTypeMapping TypeName="AdventureWorks2008_DataModel.CountryRegionCurrency">
               <MappingFragment StoreEntitySet="CountryRegionCurrency">
@@ -298,26 +237,23 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="AdbWorks1">
-        <EntityTypeShape EntityType="AdventureWorks2008_DataModel.CountryRegion" Width="1.5" PointX="0.75" PointY="0.75" Height="1.787985026041667" IsExpanded="true" />
-        <EntityTypeShape EntityType="AdventureWorks2008_DataModel.CountryRegionCurrency" Width="1.5" PointX="3.625" PointY="0.875" Height="1.9802864583333335" IsExpanded="true" />
-        <EntityTypeShape EntityType="AdventureWorks2008_DataModel.Currency" Width="1.5" PointX="5.75" PointY="0.75" Height="2.1725878906250005" IsExpanded="true" />
-        <EntityTypeShape EntityType="AdventureWorks2008_DataModel.CurrencyRate" Width="1.5" PointX="7.875" PointY="0.625" Height="2.7494921874999996" IsExpanded="true" />
-        <AssociationConnector Association="AdventureWorks2008_DataModel.FK_CountryRegionCurrency_CountryRegion_CountryRegionCode" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="1.7064925130208335" />
-          <ConnectorPoint PointX="3.625" PointY="1.7064925130208335" />
-        </AssociationConnector>
-        <AssociationConnector Association="AdventureWorks2008_DataModel.FK_CountryRegionCurrency_Currency_CurrencyCode" ManuallyRouted="false">
-          <ConnectorPoint PointX="5.75" PointY="1.8651432291666668" />
-          <ConnectorPoint PointX="5.125" PointY="1.8651432291666668" />
+      <Diagram Name="AdWorks">
+        <EntityTypeShape EntityType="AdventureWorks2008_DataModel.CountryRegionCurrency" Width="1.5" PointX="3" PointY="1.125" Height="1.787985026041667" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdventureWorks2008_DataModel.Currency" Width="1.5" PointX="0.75" PointY="1.25" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdventureWorks2008_DataModel.CurrencyRate" Width="1.5" PointX="3" PointY="3.625" Height="2.7494921874999996" IsExpanded="true" />
+        <AssociationConnector ManuallyRouted="false" Association="AdventureWorks2008_DataModel.FK_CountryRegionCurrency_Currency_CurrencyCode">
+          <ConnectorPoint PointX="2.25" PointY="2.0814925130208337" />
+          <ConnectorPoint PointX="3" PointY="2.0814925130208337" />
         </AssociationConnector>
         <AssociationConnector Association="AdventureWorks2008_DataModel.FK_CurrencyRate_Currency_FromCurrencyCode" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.25" PointY="1.8362939453125005" />
-          <ConnectorPoint PointX="7.875" PointY="1.8362939453125005" />
+          <ConnectorPoint PointX="1.5" PointY="3.4225878906249996" />
+          <ConnectorPoint PointX="1.5" PointY="4.99974609375" />
+          <ConnectorPoint PointX="3" PointY="4.99974609375" />
         </AssociationConnector>
         <AssociationConnector Association="AdventureWorks2008_DataModel.FK_CurrencyRate_Currency_ToCurrencyCode" ManuallyRouted="false">
-          <ConnectorPoint PointX="7.25" PointY="1.2306469726562503" />
-          <ConnectorPoint PointX="7.875" PointY="1.2306469726562503" />
+          <ConnectorPoint PointX="1.9062525" PointY="3.4225878906249996" />
+          <ConnectorPoint PointX="1.9062525" PointY="4.2811205468749991" />
+          <ConnectorPoint PointX="3" PointY="4.2811205468749991" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

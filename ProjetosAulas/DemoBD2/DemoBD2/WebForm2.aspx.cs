@@ -13,5 +13,25 @@ namespace DemoBD2
         {
 
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            var bd = new AdventureWorks2008_DataEntities();
+
+            Currency moeda = new Currency();
+            moeda.CurrencyCode = TextBox1.Text;
+            moeda.Name = TextBox2.Text;
+            moeda.ModifiedDate = DateTime.Now;
+
+            var pais = (from crc in bd.CountryRegionCurrencies
+                        where crc.CountryRegionCode == DropDownList1.SelectedValue
+                        select crc).First();
+
+            moeda.CountryRegionCurrencies.Add(pais);
+
+            bd.Currencies.AddObject(moeda);    
+
+            bd.SaveChanges();
+        }
     }
 }

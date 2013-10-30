@@ -19,7 +19,6 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("AdventureWorks2008_DataModel", "FK_CountryRegionCurrency_CountryRegion_CountryRegionCode", "CountryRegion", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DemoBD2.CountryRegion), "CountryRegionCurrency", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DemoBD2.CountryRegionCurrency), true)]
 [assembly: EdmRelationshipAttribute("AdventureWorks2008_DataModel", "FK_CountryRegionCurrency_Currency_CurrencyCode", "Currency", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DemoBD2.Currency), "CountryRegionCurrency", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DemoBD2.CountryRegionCurrency), true)]
 [assembly: EdmRelationshipAttribute("AdventureWorks2008_DataModel", "FK_CurrencyRate_Currency_FromCurrencyCode", "Currency", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DemoBD2.Currency), "CurrencyRate", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DemoBD2.CurrencyRate), true)]
 [assembly: EdmRelationshipAttribute("AdventureWorks2008_DataModel", "FK_CurrencyRate_Currency_ToCurrencyCode", "Currency", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DemoBD2.Currency), "CurrencyRate", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DemoBD2.CurrencyRate), true)]
@@ -33,32 +32,32 @@ namespace DemoBD2
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class AdventureWorks2008_DataEntities1 : ObjectContext
+    public partial class AdventureWorks2008_DataEntities : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new AdventureWorks2008_DataEntities1 object using the connection string found in the 'AdventureWorks2008_DataEntities1' section of the application configuration file.
+        /// Initializes a new AdventureWorks2008_DataEntities object using the connection string found in the 'AdventureWorks2008_DataEntities' section of the application configuration file.
         /// </summary>
-        public AdventureWorks2008_DataEntities1() : base("name=AdventureWorks2008_DataEntities1", "AdventureWorks2008_DataEntities1")
+        public AdventureWorks2008_DataEntities() : base("name=AdventureWorks2008_DataEntities", "AdventureWorks2008_DataEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new AdventureWorks2008_DataEntities1 object.
+        /// Initialize a new AdventureWorks2008_DataEntities object.
         /// </summary>
-        public AdventureWorks2008_DataEntities1(string connectionString) : base(connectionString, "AdventureWorks2008_DataEntities1")
+        public AdventureWorks2008_DataEntities(string connectionString) : base(connectionString, "AdventureWorks2008_DataEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new AdventureWorks2008_DataEntities1 object.
+        /// Initialize a new AdventureWorks2008_DataEntities object.
         /// </summary>
-        public AdventureWorks2008_DataEntities1(EntityConnection connection) : base(connection, "AdventureWorks2008_DataEntities1")
+        public AdventureWorks2008_DataEntities(EntityConnection connection) : base(connection, "AdventureWorks2008_DataEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -73,22 +72,6 @@ namespace DemoBD2
         #endregion
     
         #region ObjectSet Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<CountryRegion> CountryRegions
-        {
-            get
-            {
-                if ((_CountryRegions == null))
-                {
-                    _CountryRegions = base.CreateObjectSet<CountryRegion>("CountryRegions");
-                }
-                return _CountryRegions;
-            }
-        }
-        private ObjectSet<CountryRegion> _CountryRegions;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -143,14 +126,6 @@ namespace DemoBD2
         #region AddTo Methods
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the CountryRegions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToCountryRegions(CountryRegion countryRegion)
-        {
-            base.AddObject("CountryRegions", countryRegion);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the CountryRegionCurrencies EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToCountryRegionCurrencies(CountryRegionCurrency countryRegionCurrency)
@@ -181,141 +156,6 @@ namespace DemoBD2
     #endregion
 
     #region Entities
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="AdventureWorks2008_DataModel", Name="CountryRegion")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class CountryRegion : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new CountryRegion object.
-        /// </summary>
-        /// <param name="countryRegionCode">Initial value of the CountryRegionCode property.</param>
-        /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
-        public static CountryRegion CreateCountryRegion(global::System.String countryRegionCode, global::System.String name, global::System.DateTime modifiedDate)
-        {
-            CountryRegion countryRegion = new CountryRegion();
-            countryRegion.CountryRegionCode = countryRegionCode;
-            countryRegion.Name = name;
-            countryRegion.ModifiedDate = modifiedDate;
-            return countryRegion;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String CountryRegionCode
-        {
-            get
-            {
-                return _CountryRegionCode;
-            }
-            set
-            {
-                if (_CountryRegionCode != value)
-                {
-                    OnCountryRegionCodeChanging(value);
-                    ReportPropertyChanging("CountryRegionCode");
-                    _CountryRegionCode = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("CountryRegionCode");
-                    OnCountryRegionCodeChanged();
-                }
-            }
-        }
-        private global::System.String _CountryRegionCode;
-        partial void OnCountryRegionCodeChanging(global::System.String value);
-        partial void OnCountryRegionCodeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                OnNameChanging(value);
-                ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Name");
-                OnNameChanged();
-            }
-        }
-        private global::System.String _Name;
-        partial void OnNameChanging(global::System.String value);
-        partial void OnNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.DateTime ModifiedDate
-        {
-            get
-            {
-                return _ModifiedDate;
-            }
-            set
-            {
-                OnModifiedDateChanging(value);
-                ReportPropertyChanging("ModifiedDate");
-                _ModifiedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ModifiedDate");
-                OnModifiedDateChanged();
-            }
-        }
-        private global::System.DateTime _ModifiedDate;
-        partial void OnModifiedDateChanging(global::System.DateTime value);
-        partial void OnModifiedDateChanged();
-
-        #endregion
-
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AdventureWorks2008_DataModel", "FK_CountryRegionCurrency_CountryRegion_CountryRegionCode", "CountryRegionCurrency")]
-        public EntityCollection<CountryRegionCurrency> CountryRegionCurrencies
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<CountryRegionCurrency>("AdventureWorks2008_DataModel.FK_CountryRegionCurrency_CountryRegion_CountryRegionCode", "CountryRegionCurrency");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<CountryRegionCurrency>("AdventureWorks2008_DataModel.FK_CountryRegionCurrency_CountryRegion_CountryRegionCode", "CountryRegionCurrency", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -428,44 +268,6 @@ namespace DemoBD2
 
     
         #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("AdventureWorks2008_DataModel", "FK_CountryRegionCurrency_CountryRegion_CountryRegionCode", "CountryRegion")]
-        public CountryRegion CountryRegion
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CountryRegion>("AdventureWorks2008_DataModel.FK_CountryRegionCurrency_CountryRegion_CountryRegionCode", "CountryRegion").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CountryRegion>("AdventureWorks2008_DataModel.FK_CountryRegionCurrency_CountryRegion_CountryRegionCode", "CountryRegion").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<CountryRegion> CountryRegionReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<CountryRegion>("AdventureWorks2008_DataModel.FK_CountryRegionCurrency_CountryRegion_CountryRegionCode", "CountryRegion");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<CountryRegion>("AdventureWorks2008_DataModel.FK_CountryRegionCurrency_CountryRegion_CountryRegionCode", "CountryRegion", value);
-                }
-            }
-        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -647,7 +449,7 @@ namespace DemoBD2
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("AdventureWorks2008_DataModel", "FK_CurrencyRate_Currency_FromCurrencyCode", "CurrencyRate")]
-        public EntityCollection<CurrencyRate> FromCurrencyRates
+        public EntityCollection<CurrencyRate> CurrencyRates
         {
             get
             {
@@ -669,7 +471,7 @@ namespace DemoBD2
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("AdventureWorks2008_DataModel", "FK_CurrencyRate_Currency_ToCurrencyCode", "CurrencyRate")]
-        public EntityCollection<CurrencyRate> ToCurrencyRates1
+        public EntityCollection<CurrencyRate> CurrencyRates1
         {
             get
             {
@@ -908,7 +710,7 @@ namespace DemoBD2
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("AdventureWorks2008_DataModel", "FK_CurrencyRate_Currency_FromCurrencyCode", "Currency")]
-        public Currency FromCurrency
+        public Currency Currency
         {
             get
             {
@@ -924,7 +726,7 @@ namespace DemoBD2
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Currency> FromCurrencyReference
+        public EntityReference<Currency> CurrencyReference
         {
             get
             {
@@ -946,7 +748,7 @@ namespace DemoBD2
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("AdventureWorks2008_DataModel", "FK_CurrencyRate_Currency_ToCurrencyCode", "Currency")]
-        public Currency ToCurrency1
+        public Currency Currency1
         {
             get
             {
@@ -962,7 +764,7 @@ namespace DemoBD2
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Currency> ToCurrency1Reference
+        public EntityReference<Currency> Currency1Reference
         {
             get
             {
