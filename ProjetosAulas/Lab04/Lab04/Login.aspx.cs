@@ -44,7 +44,7 @@ namespace Lab04
             ViewState["Tries"] = System.Convert.ToInt32(ViewState["Tries"]) + 1;
             if (System.Convert.ToInt32(ViewState["Tries"]) > 3)
             {
-                Response.Redirect("Denied.htm");
+                Response.Redirect("Denied.html");
             }
 
         }
